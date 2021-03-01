@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
       with:
-        fetch-depth: 10  # greater than the number of commits you made
+        ref: ${{ github.event.pull_request.head.ref }}
     - run: |        
         git remote add upstream https://github.com/l499477004/JD-scripts.git;
         git fetch upstream master --depth=10;
