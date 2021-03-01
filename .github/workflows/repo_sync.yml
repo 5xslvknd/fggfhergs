@@ -15,32 +15,19 @@ jobs:
       with:
         fetch-depth: 10  # greater than the number of commits you made
 
-    - uses: imba-tjd/rebase-upstream-action@master
-      with:  # All args are optional
-        upstream: l499477004/JD-scripts
-        branch:   master
+#     - uses: imba-tjd/rebase-upstream-action@master
+#       with:  # All args are optional
+#         upstream: l499477004/JD-scripts
+#         branch:   master
 #       id: rebase
 #       with:
 #         upstream: l499477004/JD-scripts
-    - run: |
-        upstream: l499477004/JD-scripts
-        branch:   master
-        
-        set -ex;
-        UPSTREAM=${{ inputs.upstream }};
-        if [ -z $UPSTREAM ]; then
-            echo ${{ inputs.token }} | gh auth login --with-token;
-            UPSTREAM=$(a.json | jq .parent.full_name);
-            if [ -z $UPSTREAM ]; then echo "Can't find upstream" && exit 1; fi;
-        fi;
-        git remote add upstream https://github.com/$UPSTREAM.git;
-        git fetch upstream ${{ inputs.branch }} --depth=${{ inputs.depth }};
+    - run: |        
+        git remote add upstream https://github.com/l499477004/JD-scripts.git;
+        git fetch upstream master --depth=10;
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com";
         git config --local user.name  "GitHub Actions";
-        git rebase upstream/${{ inputs.branch }};
-        if [ "$(git status | grep diverged)" ]; then
-          git push origin $(git branch --show-current) --force-with-lease;
-        fi;
+        git rebase upstream/master;
       shell: bash
     - uses: ad-m/github-push-action@master
       if: steps.rebase.outputs.needs-push
