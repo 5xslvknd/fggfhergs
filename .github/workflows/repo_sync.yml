@@ -34,5 +34,5 @@ jobs:
 #       if: steps.rebase.outputs.needs-push
 #       with:
 #         force: true
-#         github_token: ${{ secrets.PAT }}
+        github_token: ${{ secrets.PAT }}
 #         branch: ${{ github.ref }}
