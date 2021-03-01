@@ -30,9 +30,9 @@ jobs:
 #       id: rebase
 #       with:
 #         upstream: l499477004/JD-scripts
-#     - uses: ad-m/github-push-action@master
-#       if: steps.rebase.outputs.needs-push
-#       with:
-#         force: true
+    - uses: ad-m/github-push-action@master
+      if: steps.rebase.outputs.needs-push
+      with:
+        force: true
         github_token: ${{ secrets.PAT }}
 #         branch: ${{ github.ref }}
